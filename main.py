@@ -1,40 +1,34 @@
 from calculator import add, subtract, multiply, divide
 
-def main():
+def repl():
+    print("Simple Calculator. Type 'quit' to exit.")
     while True:
-        print("\nSimple Calculator")
-        print("1. Add")
-        print("2. Subtract")
-        print("3. Multiply")
-        print("4. Divide")
-        print("5. Exit")
-
-        choice = input("Enter choice: ")
-
-        if choice == '5':
-            print("Goodbye!")
+        expr = input("Enter calculation (e.g., 2 + 2): ")
+        if expr.lower() in ["quit", "exit"]:
             break
-
         try:
-            a = float(input("Enter first number: "))
-            b = float(input("Enter second number: "))
-        except ValueError:
-            print("Invalid number input, try again.")
-            continue
+            tokens = expr.split()
+            if len(tokens) != 3:
+                print("Invalid format. Use: number operator number")
+                continue
+            a, op, b = tokens
+            a, b = float(a), float(b)
 
-        if choice == '1':
-            print("Result:", add(a, b))
-        elif choice == '2':
-            print("Result:", subtract(a, b))
-        elif choice == '3':
-            print("Result:", multiply(a, b))
-        elif choice == '4':
-            try:
-                print("Result:", divide(a, b))
-            except ValueError as e:
-                print(e)
-        else:
-            print("Invalid choice")
+            if op == "+":
+                result = add(a, b)
+            elif op == "-":
+                result = subtract(a, b)
+            elif op == "*":
+                result = multiply(a, b)
+            elif op == "/":
+                result = divide(a, b)
+            else:
+                print("Unsupported operator.")
+                continue
+
+            print(f"Result: {result}")
+        except Exception as e:
+            print(f"Error: {e}")
 
 if __name__ == "__main__":
-    main()
+    repl()
