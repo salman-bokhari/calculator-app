@@ -10,4 +10,7 @@ RUN pip install pytest
 
 COPY . .
 
+# Ensure Python can find local packages
+ENV PYTHONPATH=/app
+
 CMD ["python", "main.py"]

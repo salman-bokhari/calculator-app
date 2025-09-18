@@ -17,5 +17,4 @@ jobs:
       run: docker build -t calculator-app .
 
     - name: Run tests inside Docker
-      run: |
-        docker run --rm calculator-app pytest -v --color=yes
+      run: docker run --rm calculator-app pytest -v --color=yes
