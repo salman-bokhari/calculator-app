@@ -1,16 +1,24 @@
 from calculator import add, subtract, multiply, divide
 
 def repl():
-    print("Simple Calculator. Type 'quit' to exit.")
+    print("=" * 40)
+    print("   🧮  Welcome to Simple Calculator  🧮")
+    print("=" * 40)
+    print("Type 'quit' or 'exit' to leave.\n")
+    print("Supported operators: +  -  *  /\n")
+
     while True:
-        expr = input("Enter calculation (e.g., 2 + 2): ")
+        expr = input("👉 Enter calculation (e.g., 2 + 2): ")
         if expr.lower() in ["quit", "exit"]:
+            print("\n👋 Goodbye!")
             break
+
         try:
             tokens = expr.split()
             if len(tokens) != 3:
-                print("Invalid format. Use: number operator number")
+                print("⚠️  Invalid format. Use: number operator number")
                 continue
+
             a, op, b = tokens
             a, b = float(a), float(b)
 
@@ -23,12 +31,13 @@ def repl():
             elif op == "/":
                 result = divide(a, b)
             else:
-                print("Unsupported operator.")
+                print("⚠️  Unsupported operator. Try + - * /")
                 continue
 
-            print(f"Result: {result}")
+            print(f"✅ Result: {a} {op} {b} = {result}\n")
+
         except Exception as e:
-            print(f"Error: {e}")
+            print(f"❌ Error: {e}\n")
 
 if __name__ == "__main__":
     repl()
