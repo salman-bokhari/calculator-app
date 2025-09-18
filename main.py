@@ -1,43 +1,13 @@
 from calculator import add, subtract, multiply, divide
 
-def repl():
-    print("=" * 40)
-    print("   🧮  Welcome to Simple Calculator  🧮")
-    print("=" * 40)
-    print("Type 'quit' or 'exit' to leave.\n")
-    print("Supported operators: +  -  *  /\n")
+def main():
+    print("📦 Running Calculator Demo inside Docker...\n")
+    print(f"2 + 3 = {add(2, 3)}")
+    print(f"10 - 4 = {subtract(10, 4)}")
+    print(f"6 * 7 = {multiply(6, 7)}")
+    print(f"20 / 5 = {divide(20, 5)}")
 
-    while True:
-        expr = input("👉 Enter calculation (e.g., 2 + 2): ")
-        if expr.lower() in ["quit", "exit"]:
-            print("\n👋 Goodbye!")
-            break
-
-        try:
-            tokens = expr.split()
-            if len(tokens) != 3:
-                print("⚠️  Invalid format. Use: number operator number")
-                continue
-
-            a, op, b = tokens
-            a, b = float(a), float(b)
-
-            if op == "+":
-                result = add(a, b)
-            elif op == "-":
-                result = subtract(a, b)
-            elif op == "*":
-                result = multiply(a, b)
-            elif op == "/":
-                result = divide(a, b)
-            else:
-                print("⚠️  Unsupported operator. Try + - * /")
-                continue
-
-            print(f"✅ Result: {a} {op} {b} = {result}\n")
-
-        except Exception as e:
-            print(f"❌ Error: {e}\n")
+    print("\n✅ Calculator demo finished successfully.")
 
 if __name__ == "__main__":
-    repl()
+    main()

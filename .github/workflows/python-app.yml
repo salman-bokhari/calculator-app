@@ -1,4 +1,4 @@
-name: Python application with Docker
+name: Python Calculator CI with Docker
 
 on:
   push:
@@ -7,14 +7,21 @@ on:
     branches: [ "main" ]
 
 jobs:
-  test:
+  build-test-run:
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v3
+      - name: Checkout code
+        uses: actions/checkout@v4
 
-    - name: Build Docker image
-      run: docker build -t calculator-app .
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
 
-    - name: Run tests inside Docker
-      run: docker run --rm calculator-app pytest -v --color=yes
+      - name: Build Docker image
+        run: docker build -t calculator-app .
+
+      - name: Run tests inside Docker
+        run: docker run --rm calculator-app pytest -v
+
+      - name: Run calculator demo
+        run: docker run --rm calculator-app
