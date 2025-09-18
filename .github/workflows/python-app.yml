@@ -26,4 +26,8 @@ jobs:
 
     - name: Run tests
       run: |
-        PYTHONPATH=. pytest
+        PYTHONPATH=. pytest -v --color=yes
+
+    - name: Build Docker image
+      run: |
+        docker build -t calculator-app .
